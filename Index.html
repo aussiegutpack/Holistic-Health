@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Holistic Health</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Workout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .date {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .workout {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Holistic Health!</h1>
-  <p>This is my GitHub Pages site.</p>
+  <div class="container">
+    <h1>Today's Workout</h1>
+    <div class="date" id="date"></div>
+    <div class="workout" id="workout"></div>
+  </div>
+  <footer>Powered by your Daily Workout App</footer>
+
+  <script>
+    // Array of daily workouts - add or change as you like
+    const workouts = [
+      "20 Push-ups, 30 seconds Plank, 15 Squats",
+      "10 Burpees, 20 Lunges (each leg), 15 Sit-ups",
+      "30 Jumping Jacks, 15 Mountain Climbers, 20 Bicycle Crunches",
+      "15 Dumbbell Curls, 20 Tricep Dips, 25 High Knees",
+      "40-Second Wall Sit, 20 Glute Bridges, 30-second Side Plank each side",
+      "10 Pull-ups, 15 Deadlifts, 20 Russian Twists",
+      "Rest day - Light stretching and walking",
+      "25 Jump Squats, 30-second Plank, 20 Leg Raises",
+      "15 Push-ups, 20 Step-ups, 30-second Hollow Hold",
+      "30-second Sprint, 15 Dumbbell Shoulder Press, 20 Bicycle Crunches",
+      // Add more workouts to cover all days or cycle through
+    ];
+
+    // Get today's date and format it
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date').textContent = today.toLocaleDateString(undefined, options);
+
+    // Pick a workout based on the day of the year so it changes daily
+    function dayOfYear(date) {
+      const start = new Date(date.getFullYear(), 0, 0);
+      const diff = date - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+
+    const index = dayOfYear(today) % workouts.length;
+    document.getElementById('workout').textContent = workouts[index];
+  </script>
 </body>
 </html>
